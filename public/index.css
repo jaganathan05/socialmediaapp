@@ -1,0 +1,10 @@
+body{
+    background-image: url(https://images.squarespace-cdn.com/content/v1/544be87de4b05d5a7fec8f52/1613493007733-5U0HSOXJDK6F14YOCMA3/BOOM_Blog+Design_Trends+2021_BlogHeader_v1.png?format=1500w);
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    background-size: 100%;
+}
+#createpost {
+    margin: 10px 40%;
+}
+

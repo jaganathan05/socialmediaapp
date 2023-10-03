@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Posts</title>
+    <link href="/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+</head>
+<body class="container-md">
+    <button type="button"  id="createpost" class="btn btn-primary"> Create Post</button>
+    <div style="display: none;" id="postform">
+        <form action="/posts" method="post">
+            <label class="form-label" >Post Image Url</label>
+            <input class="form-control-sm" type="text" id="imageurl" name="imageurl" required>
+            <br>
+            <br>
+            <label class="form-label" > Post Content</label>
+            <input class="form-control-sm" type="text" id="content" name="content" required>
+            <br><br>
+            <button class="btn btn-sm btn-primary" type="submit">submit</button>
+        </form>
+    </div>
+
+
+        <div id="postlist">
+            <% if (posts && posts.length > 0) { %>
+                <h2>POSTS</h2>
+                <ul >
+                    <% posts.forEach((post) => { %>
+                        <li id="posts">
+                            <img src="<%= post.imageUrl %> " >
+                            <p style=" color: rgb(98, 0, 255); font-size: 30px; " class="postcontent"><%= post.content %></p>
+                            <form  action="/comment" method="post" class="commentbtn" style="display: none;">
+                                <input type="text" name="commentcontent">
+                                <button type="submit" >Comment</button>
+                            </form>
+                        </li>
+                        
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>No posts </p>
+            <% } %>
+        </div>
+    
+</body>
+<script>
+    const CP = document.getElementById('createpost');
+    const CPF = document.getElementById('postform');
+    CP.addEventListener('click',()=>{ 
+        if (CPF.style.display==="none"){
+            CPF.style.display="block";
+
+        }else{
+            CPF.style.display='none'
+        }
+
+    }) 
+
+    const PC = document.querySelectorAll('.postcontent');
+    const CB_S = document.querySelectorAll('.commentbtn');
+
+    PC.forEach((content, index) => {
+        content.addEventListener('click', () => {
+            const CB = CB_S[index];
+
+            if (CB.style.display === 'none' ) {
+                CB.style.display = 'block';
+            } else {
+                CB.style.display = 'none';
+            }
+        });
+    });
+
+</script>
+</html>
