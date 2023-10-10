@@ -8,3 +8,15 @@ body{
     margin: 10px 40%;
 }
 
+#posts{
+    width: 20rem;
+    max-width: 95%;
+    margin: 10px;
+}
+.postcontent{
+    font-size: 1.2rem;
+    text-align: center;
+}
+#image{
+    width: 300px;
+}

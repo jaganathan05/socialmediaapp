@@ -5,6 +5,10 @@ const Comment = sequelize.define('comments',{
     text: {
         type: Sequelize.TEXT,
         allowNull: false,
+      },
+      postId:{
+        type: Sequelize.INTEGER,
+        allowNull: false
       }
 })
 

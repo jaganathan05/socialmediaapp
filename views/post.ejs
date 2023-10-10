@@ -11,11 +11,11 @@
 </head>
 <style>
     ul {
-        list-style-type:none;
+        list-style-type: none;
     }
 </style>
 <body class="container-md">
-    <a id="link" href='/'>Home</a>
+    <a href='/'>Home</a>
     <button type="button"  id="createpost" class="btn btn-primary"> Create Post</button>
     <div style="display: none;" id="postform">
         <form action="/posts" method="post">
@@ -31,28 +31,33 @@
     </div>
 
 
-        <div id="postlist" >
-            <% if (posts && posts.length > 0) { %>
-                <h2>POSTS</h2>
-                <br>
-                <ul class="row">
-                    <% posts.forEach((post) => { %>
-                        <li id="posts" >
-                            <a id="link" href="/post/<%= post.id %>">
-                            <img id="image" src="<%= post.imageUrl %> ">
-                            <p style=" color: rgb(98, 0, 255); font-size: 30px; " class="postcontent"><%= post.content %></p></a>
-                            <form  action="/comment/<%= post.id %>" method="post" class="commentbtn" style="display: none;">
-                                <input type="text" name="commentcontent">
-                                <button type="submit" >Comment</button>
-                            </form>
-
+        <div id="postlist">
+                <h2>POST</h2>
+                <% if (post) {%>
+                     <li id="posts">
+                            <img src="<%= post.imageUrl %> " >
+                            <p style=" color: rgb(98, 0, 255); font-size: 30px; " class="postcontent"><%= post.content %></p>
+                            <form action="/post/delete/<%= post.id %>" method="post" >
+                                <button type="submit">X</button></form>
+                            <h6>Comments</h6>
+                            <% if ( comment && comment.length >0) { %>
+                                
+                                    <ul>
+                                        <% comment.forEach((c) => { %>
+                                        <li><%= c.text %></li><form action="/comment/delete/<%= c.id %>" method="post" >
+                                            <button type="submit">X</button></form>
+                                        
+                                        <% }); %>
+                                    </ul>
+                                    <% }%>
+                                    <form action="/comment/<%= post.id %>" method="post" class="commentbtn">
+                                        <input type="text" name="commentcontent">
+                                        <button type="submit">Comment</button>
+                                    </form>
+                            
                         </li>
+                        <% } %>
                         
-                    <% }); %>
-                </ul>
-            <% } else { %>
-                <p>No posts </p>
-            <% } %>
         </div>
     
 </body>
@@ -69,20 +74,7 @@
 
     }) 
 
-    const PC = document.querySelectorAll('.postcontent');
-    const CB_S = document.querySelectorAll('.commentbtn');
-
-    PC.forEach((content, index) => {
-        content.addEventListener('click', () => {
-            const CB = CB_S[index];
-
-            if (CB.style.display === 'none' ) {
-                CB.style.display = 'block';
-            } else {
-                CB.style.display = 'none';
-            }
-        });
-    });
+    
 
 </script>
 </html>
